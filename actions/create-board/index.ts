@@ -11,15 +11,28 @@ import { createSafeAction } from "@/lib/create-safe-action";
 
 const handler = async (data:InputType): Promise<ReturnType> => {
     const authResult = await auth(); // Разрешение промиса
-    const { userId } = authResult;
+    const { userId, orgId } = authResult;
 
-    if(!userId) {
+    if(!userId || !orgId) {
         return {
             error: "Unauthorized",
         };
     }
 
-    const { title } = data;
+    const { title, image } = data;
+
+    const [
+        imageId,
+        imageThumbUrl,
+        imageFullUrl,
+        imageLinkHTML,
+        imageUserName
+    ] = image.split("|");
+
+    if(!imageId || !imageThumbUrl || !imageFullUrl || !imageLinkHTML || !imageUserName) {
+        return {
+            error: "Missing fields" };
+    }
 
     let board;
 
@@ -27,6 +40,12 @@ const handler = async (data:InputType): Promise<ReturnType> => {
         board = await db.board.create({
             data: { 
                 title,
+                orgId,
+                imageId,
+                imageThumbUrl,
+                imageFullUrl,
+                imageLinkHTML,
+                imageUserName
             }
         });
     }catch{
