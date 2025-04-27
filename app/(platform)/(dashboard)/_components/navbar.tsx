@@ -14,7 +14,7 @@ export const Navbar = () => {
                 </div>
                 <FormPopover align="start" side="bottom" sideOffset={18}>
                     <Button variant="primary" size="sm" className="rounded-sm hidden md:block h-auto py-1.5 px-2">
-                        Create
+                        Создать Kanban-доску
                     </Button>
                 </FormPopover>
                 <FormPopover>

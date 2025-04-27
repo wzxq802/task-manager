@@ -20,7 +20,6 @@ const handler = async (data:InputType): Promise<ReturnType> => {
             error: "Unauthorized",
         };
     }
-
     const { title, image } = data;
 
     const [
@@ -50,6 +49,7 @@ const handler = async (data:InputType): Promise<ReturnType> => {
                 imageUserName
             }
         });
+
         await createAuditLog({
             entityId: board.id,
             entityTitle: board.title,

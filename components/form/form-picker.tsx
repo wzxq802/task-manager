@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { unsplash } from "@/lib/unplash";
 import { Check, Loader2 } from "lucide-react";
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 import { cn } from "@/lib/utils";
 import { defaultImages } from "@/constants/images";
 import Image from "next/image";
@@ -58,7 +58,7 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
             {images.map((image)=> (
                 <div 
                     key={image.id} 
-                    className={cn("cursor-pointer relative aspect-video group hover:opacity-75 transition bg-muted", pending && "opacity-50 hover:opacity-50 coursor-auto")}
+                    className={cn("cursor-pointer relative aspect-video group hover:opacity-75 transition bg-muted", pending && "opacity-50 hover:opacity-50 cursor-auto")}
                     onClick={() => {
                         if(pending) return;
                         setSelectedImageId(image.id);
@@ -71,8 +71,8 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
                         className="hidden"
                         checked={selectedImageId === image.id}
                         disabled={pending}
+                        onChange={() => setSelectedImageId(image.id)}
                         value={`${image.id}  |${image.urls.thumb} | ${image.urls.full} | ${image.links.html} | ${image.user.name}`}
-                        defaultChecked={false}
                     />
                     <Image
                     src={image.urls.thumb}

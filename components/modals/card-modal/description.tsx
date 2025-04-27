@@ -56,7 +56,7 @@ export const Description = ({ data }:DerscriptionProps) => {
             queryClient.invalidateQueries({
                 queryKey: ["card-logs", data.id]
             });
-            toast.success(`Card ${data.title} updated`);
+            toast.success(`Карточка ${data.title} обновлена`);
             disableEditing();
         },
         onError: (error) => {
@@ -76,7 +76,7 @@ export const Description = ({ data }:DerscriptionProps) => {
             <AlignLeft className="h-5 w-5 mt-0.5 text-neutral-700" />
             <div className="w-full">
                 <p className="f-semibold text-neutral-700  mb-2">
-                    Description
+                    Описание
                 </p>
                 { isEditing ? (
                     <form 
@@ -88,13 +88,13 @@ export const Description = ({ data }:DerscriptionProps) => {
                             ref={textareaRef}
                             id="description"
                             className="w-full mt-2 "
-                            placeholder="Add more details..."
+                            placeholder="Добавьте описание"
                             defaultValue={data.description || undefined}
                             errors={fieldErrors}
                         />
                         <div className="flex items-center gap-x-2">
                             <FormSubmit>
-                                Save
+                                Сохранить
                             </FormSubmit>
                             <Button
                                 type="button"
@@ -102,7 +102,7 @@ export const Description = ({ data }:DerscriptionProps) => {
                                 size="sm"
                                 variant="ghost"
                             >
-                                Cancel
+                                Закрыть
                             </Button>
                         </div>
                     </form>

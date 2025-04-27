@@ -32,7 +32,7 @@ export const Actions = ({data}:ActionsProps) => {
 
     const { execute: executeDeleteCard, isLoading: isLoadingDelete} = useAction(deleteCard, {
         onSuccess: (data) => {
-            toast.success(`Card ${data.title} deleted`);
+            toast.success(`Карточка ${data.title} удалена`);
             cardModal.onClose();
         },
         onError: (error) => {
@@ -59,7 +59,7 @@ export const Actions = ({data}:ActionsProps) => {
     return (
         <div className="space-y-2 mt-2">
             <p className="text-xs font-semibold">
-                Actions
+                Опции
             </p>
             <Button
                 onClick={onCopy}
@@ -69,7 +69,7 @@ export const Actions = ({data}:ActionsProps) => {
                 size="inline"
             >
                 <Copy className="w-4 h-4 mr-2 text-neutral-700" />
-                Copy
+                Копировать
             </Button>
             <Button
                 onClick={onDelete}
@@ -79,7 +79,7 @@ export const Actions = ({data}:ActionsProps) => {
                 size="inline"
             >
                 <Trash className="w-4 h-4 mr-2 text-neutral-700" />
-                Delete
+                Удалить
             </Button>
         </div>
     )

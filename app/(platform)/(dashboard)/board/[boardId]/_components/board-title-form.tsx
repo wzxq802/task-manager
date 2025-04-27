@@ -16,7 +16,7 @@ export const BoardTitleForm = ({
 }: BoardTitleFormProps) => {
     const { execute } = useAction(updateBoard, {
         onSuccess: (data) => {
-            toast.success(`Board "${data.title}" updated!`);
+            toast.success(`Kanban-доска "${data.title}" обновлена!`);
             setTitle(data.title);
             disableEditing();
         },
@@ -62,7 +62,7 @@ export const BoardTitleForm = ({
                     ref = {inputRef}
                     id="title" 
                     onBlur={onBlur} 
-                    defaulValue={title}
+                    defaultValue={title}
                     className="font-bold text-lg px-[7px] py-1 h-7 bg-transparent focus-visible:outline-none focus-visible:ring-transparent border-none"
                 />
             </form>

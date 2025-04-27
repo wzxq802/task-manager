@@ -30,6 +30,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
                 orgId,
             },
         });
+
         await createAuditLog({
             entityId: board.id,
             entityTitle: board.title,

@@ -9,11 +9,11 @@ export const Navbar= () => {
                 <Logo/>
                 <div className="space-x-4 md:block md:w-auto flex items-center justify-between w-full">
                     <Button className="bg-blue-200 text-blackText hover:bg-blue-300 hover:text-white" size="sm" asChild>
-                        <Link  href="/sing-in">Login</Link>
+                        <Link  href="/sing-in">Войти</Link>
                     </Button>
-                    <Button className="bg-white text-blackText hover:bg-blue-300 hover:text-white" size="sm" asChild>
+                    {/* <Button className="bg-white text-blackText hover:bg-blue-300 hover:text-white" size="sm" asChild>
                         <Link href="/sing-up">Get start with GuruTask</Link>
-                    </Button>
+                    </Button> */}
                 </div>
             </div>
         </div>

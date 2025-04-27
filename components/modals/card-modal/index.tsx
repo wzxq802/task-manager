@@ -1,7 +1,7 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 import { useCardModal } from "@/hooks/use-card-modal";
 import { CardWithList } from "@/types";
 import { fetcher } from "@/lib/fetcher";
@@ -32,12 +32,15 @@ export const CardModal = () => {
             onOpenChange={onCLose}
         >
             <DialogContent>
+                <DialogTitle>
+                    {cardData?.title || "Загрузка..."}
+                </DialogTitle>
                 {!cardData
                     ? <Header.Skeleton/>
                     : <Header data={cardData} />
                 }
                 <div className="grid grid-cols-1 md:grid-cols-4 md:gap-4">
-                    <div className="col-span3-">
+                    <div className="col-span-3">
                         <div className="w-full space-y-6">
                             {!cardData
                                 ? <Description.Skeleton/>

@@ -4,7 +4,7 @@ import { useRouter, usePathname } from "next/navigation";
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import  Image  from "next/image";
 import { cn } from "@/lib/utils";
-import {Activity, CreditCard, Layout, Settings, } from "lucide-react";
+import {Activity, Layout, Settings, } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -32,24 +32,19 @@ export const NavItem = ({
     const pathname = usePathname();
     const routes = [
        {
-        label: "Boards",
+        label: "Канбан-доски",
         icon: <Layout className="h-4 w-4 mr-2" />,
         href: `/organization/${organization.id}`
        },
        {
-        label: "Activity",
+        label: "Журнал",
         icon: <Activity className="h-4 w-4 mr-2" />,
         href: `/organization/${organization.id}/activity`,
        },
        {
-        label: "Settings",
+        label: "Настройки",
         icon: <Settings className="h-4 w-4 mr-2" />,
         href: `/organization/${organization.id}/settings`,
-       },
-       {
-        label: "Billing",
-        icon: <CreditCard className="h-4 w-4 mr-2" />,
-        href: `/organization/${organization.id}/billing`,
        }
     ];
 

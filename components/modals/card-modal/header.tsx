@@ -20,7 +20,7 @@ export const Header = ({ data }: HeaderProps) => {
 
     const { execute } = useAction(updateCard, {
         onSuccess: (data) => {
-            toast.success(`Card ${data.title} updated`);
+            toast.success(`Карточка ${data.title} обновлена`);
             queryClient.invalidateQueries({
                 queryKey: ["card", data.id]
             });
@@ -35,7 +35,7 @@ export const Header = ({ data }: HeaderProps) => {
 
     const inputRef = useRef<ElementRef<"input">>(null);
 
-    const [title, setTitle] = useState(data.title);
+    const [title] = useState(data.title);
 
     const onBlur = () => {
         inputRef.current?.form?.requestSubmit();
@@ -66,7 +66,7 @@ export const Header = ({ data }: HeaderProps) => {
                         onBlur={onBlur}
 
                         id="title"
-                        defaulValue={title}
+                        defaultValue={title}
                         className="font-semibold text-lg px-1 text-neutral-700 bg-transparent border-transparent relative -left-1.5 w-[95%] focus-visible:bg-white focus-visible:border-input mb-0.5 truncate"
                     />
                 </form>

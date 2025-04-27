@@ -12,17 +12,17 @@ import { toast } from "sonner";
 import { ElementRef, useRef } from "react";
 import { copyList } from "@/actions/copy-list";
 
-interface ListOptionsProprs {
+interface ListOptionsProps {
     data: List;
     onAddCard: () => void;
 }
 
-export const ListOptions = ({data, onAddCard}:ListOptionsProprs) => {
+export const ListOptions = ({data, onAddCard}:ListOptionsProps) => {
     const closeRef = useRef<ElementRef<"button">>(null);
 
     const { execute: executeDelete } = useAction(deleteList, {
         onSuccess: (data) => {
-            toast.success(`List "${data.title}" deleted`);
+            toast.success(`Список "${data.title}" удален`);
             closeRef.current?.click();
         },
         onError: (error) => {
@@ -63,7 +63,7 @@ export const ListOptions = ({data, onAddCard}:ListOptionsProprs) => {
             </PopoverTrigger>
             <PopoverContent className="px-0 pt-3 pb-3" side="bottom" align="start">
                 <div className="text-sm font-medium text-center text-neutral-600 pb-4">
-                    list actions
+                    Опции
                 </div>
                 <PopoverClose ref={closeRef} asChild>
                     <Button className="h-auto w-auto p-2 absolute top-2 right-2 text-neutral-600" variant="ghost">
@@ -75,27 +75,27 @@ export const ListOptions = ({data, onAddCard}:ListOptionsProprs) => {
                     className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
                     variant="ghost"
                 >
-                    Add card...
+                   Создать карточку
                 </Button>
                 <form action={onCopy}>
-                    <input hidden name="id" id="id" value={data.id}/>
-                    <input hidden name="boardId" id="boardId" value={data.boardId}/>
+                    <input hidden name="id" id="id" defaultValue={data.id}/>
+                    <input hidden name="boardId" id="boardId" defaultValue={data.boardId}/>
                     <FormSubmit
                         className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
                         variant="ghost"
                     >
-                        Copy list...
+                        Копировать
                     </FormSubmit>
                 </form>
                 <Separator/>
                 <form action={onDelete}>
-                    <input hidden name="id" id="id" value={data.id}/>
-                    <input hidden name="boardId" id="boardId" value={data.boardId}/>
+                    <input hidden name="id" id="id" defaultValue={data.id}/>
+                    <input hidden name="boardId" id="boardId" defaultValue={data.boardId}/>
                     <FormSubmit
                         className="rounded-none w-full h-auto p-2 px-5 justify-start font-normal text-sm"
                         variant="ghost"
                     >
-                        Delete this list...
+                        Удалить
                     </FormSubmit>
                 </form>
             </PopoverContent>

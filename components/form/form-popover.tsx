@@ -30,7 +30,7 @@ export const FormPopover = ({
 
     const { execute, fieldErrors} = useAction(createBoard, {
         onSuccess: (data) => {
-            toast.success("Board created");
+            toast.success("Kanban-доска создана");
             closeRef.current?.click();
             router.push(`/board/${data.id}`);
         },
@@ -58,7 +58,7 @@ export const FormPopover = ({
                 sideOffset={sideOffset}
             >
                 <div className="text-sm font-medium text-center text-neutral-600 pb-4">
-                    Create a new board
+                    Создать новую Kanban-доску
                 </div>
                 <PopoverClose ref={closeRef} asChild>
                     <Button className="h-auto w-auto p-2 absolute top-2 right-2 text-neutral-600" variant="ghost">
@@ -73,13 +73,13 @@ export const FormPopover = ({
                         />
                         <FormInput
                             id="title"
-                            label="Board of title"
+                            label="Название"
                             type="text"
                             errors={fieldErrors}
                         />
                     </div>
-                    <FormSubmit className="w-full">
-                       Create 
+                    <FormSubmit className="w-full justify-center">
+                       Создать
                     </FormSubmit>
                 </form>
             </PopoverContent>
