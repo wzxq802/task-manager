@@ -9,5 +9,5 @@ export const CreateCard = z.object({
         message: "Title is too short" 
     }),
     boardId: z.string(),
-    listId: z.string()
+    listId: z.string(),
 });

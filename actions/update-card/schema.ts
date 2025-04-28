@@ -19,5 +19,8 @@ export const UpdateCard = z.object({
             message: "Title is too short" 
         }),
     ),
+    priority: z.optional(
+        z.enum(["LOW", "MEDIUM", "HIGH"])
+    ),
     id: z.string()
 });

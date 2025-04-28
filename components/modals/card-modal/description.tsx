@@ -112,7 +112,7 @@ export const Description = ({ data }:DerscriptionProps) => {
                         onClick={enableEditing}
                         className="min-h-[78px] bg-neutral-200 text-sm font-medium py-3 px-3.5 rounded-md"
                     >
-                        {data.description || "Add more details..."} 
+                        {data.description || "Добавьте описание..."} 
                     </div>
                 )}
             </div>

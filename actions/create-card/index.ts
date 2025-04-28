@@ -8,7 +8,6 @@ import { createSafeAction } from "@/lib/create-safe-action";
 import { CreateCard } from "./schema";
 import { createAuditLog } from "@/lib/create-audit-log";
 import { ACTION, ENTITY_TYPE } from "@prisma/client";
-
 const handler = async (data: InputType): Promise<ReturnType> => {
     const {userId, orgId} = await auth();
 

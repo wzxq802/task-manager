@@ -57,12 +57,13 @@ model Card {
   listId String
   list List @relation(fields: [listId], references: [id], onDelete: Cascade)
 
+  priority PRIORITY @default(LOW)
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
   @@index([listId])
 }
-
 enum ACTION {
   CREATE
   UPDATE
@@ -74,7 +75,11 @@ enum ENTITY_TYPE {
   LIST
   CARD
 }
-
+enum PRIORITY {
+  LOW
+  MEDIUM
+  HIGH
+}
 model AuditLog {
   id String @id @default(uuid())
   orgId String
@@ -88,22 +93,4 @@ model AuditLog {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-}
-
-model OrgLimit {
-  id String @id @default(uuid())
-  orgId String @unique
-  count Int @default(0)
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}
-
-model OrgSubscription {
-  id String @id @default(uuid())
-  orgId String @unique
-  stripeCustomerId String? @unique @map(name : "stripe_customer_id")
-  stripeSubscriptionId String? @unique @map(name : "stripe_subscription_id")
-  stripePriceId String?  @map(name : "stripe_price_id")
-  stripeCurrentPeriodEnd DateTime?  @map(name : "stripe_current_period_end")
 }
