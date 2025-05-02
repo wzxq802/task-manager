@@ -2,7 +2,7 @@ import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { notFound, redirect } from "next/navigation";
 import { BoardNavbar } from "./_components/board-navbar";
-import { ReactNode } from "react"; // ✅ Добавь импорт
+import { ReactNode } from "react"; 
 
 export async function generateMetadata({
   params,
@@ -28,7 +28,7 @@ export async function generateMetadata({
   };
 }
 
-// ✅ Явно определим типы без внешних LayoutProps
+// ✅ Задаём тип явно
 interface BoardIdLayoutProps {
   children: ReactNode;
   params: {
@@ -36,7 +36,10 @@ interface BoardIdLayoutProps {
   };
 }
 
-const BoardIdLayout = async ({ children, params }: BoardIdLayoutProps) => {
+const BoardIdLayout = async ({
+  children,
+  params,
+}: BoardIdLayoutProps) => {
   const authData = await auth();
   const orgId = authData.orgId;
 
