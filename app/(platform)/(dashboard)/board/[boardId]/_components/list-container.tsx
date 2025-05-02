@@ -1,6 +1,6 @@
 "use client";
 
-import { DragDropContext, Droppable } from "@hello-pangea/dnd";
+import { DragDropContext, Droppable, DropResult } from "@hello-pangea/dnd";
 import { ListWithCards } from "@/types";
 import { ListForm } from "./list-form";
 import { useEffect, useState } from "react";
@@ -48,7 +48,7 @@ export const ListContainer = ({ data, boardId }: ListContainerProps) => {
         setOrderedData(data);
     }, [data]);
 
-    const onDragEnd = (result:any) => {
+    const onDragEnd = (result:DropResult) => {
         const { source, destination, type } = result;
 
         if(!destination) {
