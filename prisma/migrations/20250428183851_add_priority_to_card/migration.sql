@@ -1,0 +1,5 @@
+-- CreateEnum
+CREATE TYPE "PRIORITY" AS ENUM ('LOW', 'MEDIUM', 'HIGH');
+
+-- AlterTable
+ALTER TABLE "Card" ADD COLUMN     "priority" "PRIORITY" NOT NULL DEFAULT 'LOW';
