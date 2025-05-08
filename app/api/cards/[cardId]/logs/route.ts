@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { ENTITY_TYPE } from "@prisma/client";
 
-// Правильная типизация params для маршрута в app директории
+// Новый правильный синтаксис для маршрутов в app директории
 export async function GET(request: NextRequest, { params }: { params: { cardId: string } }) {
     try {
         const { userId, orgId } = await auth();
