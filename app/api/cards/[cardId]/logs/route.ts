@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { ENTITY_TYPE } from "@prisma/client";
 
-// Типизация для Next.js 13 с новым API
-export async function GET(request: NextRequest, context: { params: { cardId: string } }) {
+// Обратите внимание, что мы используем тип для params.
+export async function GET(request: NextRequest, { params }: { params: { cardId: string } }) {
     try {
         const { userId, orgId } = await auth();
 
@@ -12,7 +12,7 @@ export async function GET(request: NextRequest, context: { params: { cardId: str
             return new NextResponse("Unauthorized", { status: 401 });
         }
 
-        const { cardId } = context.params; // извлекаем cardId из context.params
+        const { cardId } = params; // cardId извлекается из params
 
         const auditLogs = await db.auditLog.findMany({
             where: {
