@@ -4,17 +4,14 @@ import { auth } from "@clerk/nextjs/server";
 import { notFound, redirect } from "next/navigation";
 import { BoardNavbar } from "./_components/board-navbar";
 
-interface BoardIdLayoutProps {
+type Props = {
   children: ReactNode;
   params: {
     boardId: string;
   };
-}
+};
 
-export default async function BoardIdLayout({
-  children,
-  params,
-}: BoardIdLayoutProps) {
+export default async function BoardIdLayout({ children, params }: Props) {
   const authData = await auth();
   const orgId = authData.orgId;
 
