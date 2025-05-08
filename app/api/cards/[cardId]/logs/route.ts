@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { ENTITY_TYPE } from "@prisma/client";
 
-// Использование правильной синтаксиса для API маршрута
+// Добавляем правильный тип для params
 export async function GET(request: NextRequest, { params }: { params: { cardId: string } }) {
     try {
         const { userId, orgId } = await auth();
@@ -12,8 +12,7 @@ export async function GET(request: NextRequest, { params }: { params: { cardId: 
             return new NextResponse("Unauthorized", { status: 401 });
         }
 
-        // Получаем cardId из params
-        const { cardId } = params; // Используем destructuring для извлечения cardId
+        const { cardId } = params; // Извлекаем cardId из params
 
         const auditLogs = await db.auditLog.findMany({
             where: {
@@ -28,7 +27,7 @@ export async function GET(request: NextRequest, { params }: { params: { cardId: 
         });
 
         return NextResponse.json(auditLogs);
-    } catch  {
+    } catch {
         return new NextResponse("Internal error", { status: 500 });
     }
 }
