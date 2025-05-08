@@ -3,8 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { ENTITY_TYPE } from "@prisma/client";
 
-// Параметры маршрута будут передаваться через URL
-export async function GET(request: NextRequest, { params }: { params: { cardId: string } }) {
+export async function GET(request: NextRequest, { params }: { params: Promise<{ cardId: string }> }) {
     try {
         const { userId, orgId } = await auth();
 
@@ -12,11 +11,7 @@ export async function GET(request: NextRequest, { params }: { params: { cardId: 
             return new NextResponse("Unauthorized", { status: 401 });
         }
 
-        const { cardId } = params; // Извлекаем cardId из params
-
-        if (!cardId) {
-            return new NextResponse("Card ID not found", { status: 400 });
-        }
+        const { cardId } = await params;  // Теперь извлекаем cardId после того, как промис разрешится
 
         const auditLogs = await db.auditLog.findMany({
             where: {
@@ -32,7 +27,7 @@ export async function GET(request: NextRequest, { params }: { params: { cardId: 
 
         return NextResponse.json(auditLogs);
     } catch (error) {
-        console.error(error);
+        console.error(error); 
         return new NextResponse("Internal error", { status: 500 });
     }
 }
