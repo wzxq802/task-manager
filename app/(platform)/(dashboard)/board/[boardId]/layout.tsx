@@ -4,37 +4,36 @@ import { auth } from "@clerk/nextjs/server";
 import { notFound, redirect } from "next/navigation";
 import { BoardNavbar } from "./_components/board-navbar";
 
-// Определяем тип для входящего props
 type Props = {
   children: ReactNode;
   params: {
-    boardId: string;
+    boardId: string | undefined;
   };
 };
-
-// Компонент
 export default async function BoardIdLayout({ children, params }: Props) {
+  const { boardId } = params;
+
+  if (!boardId) {
+    return notFound();
+  }
+
   try {
-    const authData = await auth(); // Получаем аутентификационные данные
-    const orgId = authData?.orgId; // Извлекаем идентификатор организации
+    const authData = await auth();
+    const orgId = authData?.orgId;
 
     if (!orgId) {
-      redirect("/select-org"); // Перенаправляем пользователя, если организация не выбрана
+      redirect("/select-org");
     }
-
-    // Проверяем существование доски
     const board = await db.board.findUnique({
       where: {
-        id: params.boardId, // Используем переданный boardId
+        id: boardId,
         orgId,
       },
     });
 
     if (!board) {
-      notFound(); // Возвращаем страницу "не найдено", если доска отсутствует
+      return notFound();
     }
-
-    // Рендерим главную разметку страницы
     return (
       <div
         className="relative h-full bg-no-repeat bg-cover bg-center"
@@ -42,10 +41,10 @@ export default async function BoardIdLayout({ children, params }: Props) {
           backgroundImage: `url(${board.imageFullUrl})`,
         }}
       >
-        <BoardNavbar data={board} /> {/* Навигационная панель */}
+        <BoardNavbar data={board} />
         <div className="absolute inset-0 bg-black/10" />
         <main className="relative pt-28 h-full">
-          {children} {/* Содержимое дочерних элементов */}
+          {children}
         </main>
       </div>
     );
