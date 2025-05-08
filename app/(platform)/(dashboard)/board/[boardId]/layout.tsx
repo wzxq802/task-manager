@@ -11,17 +11,10 @@ interface BoardIdLayoutProps {
   };
 }
 
-export default function BoardIdLayout({ children, params }: BoardIdLayoutProps) {
-  return <BoardLayoutContent boardId={params.boardId}>{children}</BoardLayoutContent>;
-}
-
-async function BoardLayoutContent({
-  boardId,
+export default async function BoardIdLayout({
   children,
-}: {
-  boardId: string;
-  children: ReactNode;
-}) {
+  params,
+}: BoardIdLayoutProps) {
   const authData = await auth();
   const orgId = authData.orgId;
 
@@ -31,7 +24,7 @@ async function BoardLayoutContent({
 
   const board = await db.board.findUnique({
     where: {
-      id: boardId,
+      id: params.boardId,
       orgId,
     },
   });
