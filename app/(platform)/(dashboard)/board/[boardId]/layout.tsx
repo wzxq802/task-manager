@@ -2,16 +2,8 @@ import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { notFound, redirect } from "next/navigation";
 import { BoardNavbar } from "./_components/board-navbar";
-import { ReactNode } from "react";
 
-// Эта сигнатура соответствует ожиданиям Next.js
-export default async function BoardIdLayout({
-  children,
-  params,
-}: {
-  children: ReactNode;
-  params: { boardId: string };
-}) {
+export default async function Layout({ children, params }: any) {
   const authData = await auth();
   const orgId = authData.orgId;
 
