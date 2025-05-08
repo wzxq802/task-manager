@@ -1,8 +1,8 @@
+import { ReactNode } from "react";
 import { db } from "@/lib/db";
 import { auth } from "@clerk/nextjs/server";
 import { notFound, redirect } from "next/navigation";
 import { BoardNavbar } from "./_components/board-navbar";
-import { ReactNode } from "react";
 
 interface BoardIdLayoutProps {
   children: ReactNode;
@@ -11,10 +11,17 @@ interface BoardIdLayoutProps {
   };
 }
 
-const BoardIdLayout = async ({
+export default function BoardIdLayout({ children, params }: BoardIdLayoutProps) {
+  return <BoardLayoutContent boardId={params.boardId}>{children}</BoardLayoutContent>;
+}
+
+async function BoardLayoutContent({
+  boardId,
   children,
-  params,
-}: BoardIdLayoutProps) => {
+}: {
+  boardId: string;
+  children: ReactNode;
+}) {
   const authData = await auth();
   const orgId = authData.orgId;
 
@@ -24,7 +31,7 @@ const BoardIdLayout = async ({
 
   const board = await db.board.findUnique({
     where: {
-      id: params.boardId,
+      id: boardId,
       orgId,
     },
   });
@@ -43,6 +50,4 @@ const BoardIdLayout = async ({
       <main className="relative pt-28 h-full">{children}</main>
     </div>
   );
-};
-
-export default BoardIdLayout;
+}
