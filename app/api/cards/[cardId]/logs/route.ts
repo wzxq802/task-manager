@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { ENTITY_TYPE } from "@prisma/client";
 
+// Правильная типизация params для маршрута в app директории
 export async function GET(request: NextRequest, { params }: { params: { cardId: string } }) {
     try {
         const { userId, orgId } = await auth();
@@ -27,7 +28,7 @@ export async function GET(request: NextRequest, { params }: { params: { cardId: 
 
         return NextResponse.json(auditLogs);
     } catch (error) {
-        console.error(error); 
+        console.error(error);
         return new NextResponse("Internal error", { status: 500 });
     }
 }
