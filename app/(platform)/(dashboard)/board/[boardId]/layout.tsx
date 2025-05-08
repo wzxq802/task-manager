@@ -4,7 +4,6 @@ import { notFound, redirect } from "next/navigation";
 import { BoardNavbar } from "./_components/board-navbar";
 import { ReactNode } from "react";
 
-// Типы для layout компонента Next.js
 interface BoardIdLayoutProps {
   children: ReactNode;
   params: {
