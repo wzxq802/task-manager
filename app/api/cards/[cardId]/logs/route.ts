@@ -27,6 +27,7 @@ export async function GET(request: NextRequest, { params }: { params: { cardId: 
 
         return NextResponse.json(auditLogs);
     } catch (error) {
+        console.error(error); 
         return new NextResponse("Internal error", { status: 500 });
     }
 }
