@@ -3,46 +3,47 @@ import { db } from "@/lib/db";
 import { redirect } from "next/navigation";
 import { ListContainer } from "./_components/list-container";
 
+// ⛏️ params — Promise
 interface BoardIdPageProps {
-    params: {
-        boardId: string;
-    };
+  params: Promise<{
+    boardId: string;
+  }>;
 }
 
 const BoardIdPage = async ({ params }: BoardIdPageProps) => {
-    const authData = await auth(); // Ожидаем результата от auth()
-    const orgId = authData.orgId; // Извлекаем orgId
+  const { boardId } = await params; // 👈 дожидаемся boardId
 
-    if(!orgId) {
-        redirect("/select-org");
-    }
+  const authData = await auth();
+  const orgId = authData?.orgId;
 
-    const lists = await db.list.findMany({
-        where: {
-            boardId: params.boardId,
-            board: {
-                orgId,
-            }
-        },
-        include: {
-            cards: {
-                orderBy: {
-                    order: "asc",
-                },
-            },
-        },
+  if (!orgId) {
+    redirect("/select-org");
+  }
+
+  const lists = await db.list.findMany({
+    where: {
+      boardId,
+      board: {
+        orgId,
+      },
+    },
+    include: {
+      cards: {
         orderBy: {
-            order: "asc",
-        }
-    });
+          order: "asc",
+        },
+      },
+    },
+    orderBy: {
+      order: "asc",
+    },
+  });
 
-    return(
-        <div className="p-4 h-full overflow-x-auto ">
-           <ListContainer
-                boardId={params.boardId}
-                data = {lists}
-           />
-        </div>
-    )
-}
+  return (
+    <div className="p-4 h-full overflow-x-auto">
+      <ListContainer boardId={boardId} data={lists} />
+    </div>
+  );
+};
+
 export default BoardIdPage;
