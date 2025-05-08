@@ -4,18 +4,14 @@ import { notFound, redirect } from "next/navigation";
 import { BoardNavbar } from "./_components/board-navbar";
 import { ReactNode } from "react";
 
-// Типы для layout компонента Next.js
-interface BoardIdLayoutProps {
-  children: ReactNode;
-  params: {
-    boardId: string;
-  };
-}
-
-const BoardIdLayout = async ({
+// Эта сигнатура соответствует ожиданиям Next.js
+export default async function BoardIdLayout({
   children,
   params,
-}: BoardIdLayoutProps) => {
+}: {
+  children: ReactNode;
+  params: { boardId: string };
+}) {
   const authData = await auth();
   const orgId = authData.orgId;
 
@@ -44,6 +40,4 @@ const BoardIdLayout = async ({
       <main className="relative pt-28 h-full">{children}</main>
     </div>
   );
-};
-
-export default BoardIdLayout;
+}
