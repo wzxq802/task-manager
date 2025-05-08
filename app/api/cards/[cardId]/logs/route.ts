@@ -3,8 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/lib/db";
 import { ENTITY_TYPE } from "@prisma/client";
 
-// Правильное извлечение cardId
-export async function GET(request: NextRequest) {
+// Параметры маршрута будут передаваться через URL
+export async function GET(request: NextRequest, { params }: { params: { cardId: string } }) {
     try {
         const { userId, orgId } = await auth();
 
@@ -12,9 +12,7 @@ export async function GET(request: NextRequest) {
             return new NextResponse("Unauthorized", { status: 401 });
         }
 
-        // Получаем cardId из URL
-        const url = new URL(request.url);
-        const cardId = url.pathname.split("/").pop(); // Параметр cardId извлекаем из URL
+        const { cardId } = params; // Извлекаем cardId из params
 
         if (!cardId) {
             return new NextResponse("Card ID not found", { status: 400 });
