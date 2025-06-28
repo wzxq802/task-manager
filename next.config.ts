@@ -12,12 +12,10 @@ const nextConfig: NextConfig = {
         hostname: "images.unsplash.com",
       }
     ]
-  }
-  
-};
-module.exports = {
+  },
   typescript: {
     ignoreBuildErrors: true,
-  },
-}
-export default nextConfig;
+  }
+};
+
+module.exports = nextConfig;
